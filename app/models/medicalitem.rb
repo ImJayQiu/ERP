@@ -1,0 +1,2 @@
+class Medicalitem < ApplicationRecord
+end

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Covid19cases</h1>
+
+<%= button_to 'Add New Case', new_covid19case_path, method: :get %>
+<p/>
+<%= will_paginate @covid19cases %>
+<p/>
+<p/>
+
+<table>
+    <thead>
+	<tr>
+	    <th>Case ID</th>
+	    <th>Sex</th>
+	    <th>Age</th>
+	    <th>ID/Passport</th>
+	    <th>Status</th>
+	    <th colspan="3"></th>
+	</tr>
+    </thead>
+
+    <tbody>
+	<% @covid19cases.each do |covid19case| %>
+	    <tr>
+		<td><%= covid19case.id %></td>
+		<td><%= covid19case.sex %></td>
+		<td><%= covid19case.age %></td>
+		<td><%= covid19case.id_pass %></td>
+		<td><%= covid19case.status %></td>
+		<td><%= link_to 'Show', covid19case %></td>
+		<td><%= link_to 'Edit', edit_covid19case_path(covid19case) %></td>
+		<td><%= link_to 'Remove', covid19case, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>
+
+<br>
+
+<%= button_to 'Add New Case', new_covid19case_path, method: :get %>

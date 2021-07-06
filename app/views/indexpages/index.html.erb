@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Home page management</h1>
+
+<table>
+    <tbody>
+	<% @indexpages.each do |indexpage| %>
+	    <tr>
+		<td>Edit Home Page</td>
+		<td><%= link_to 'Show', indexpage %></td>
+		<td><%= link_to 'Edit', edit_indexpage_path(indexpage) %></td>
+		<td><%#= link_to 'Destroy', indexpage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Indexpage', new_indexpage_path %>

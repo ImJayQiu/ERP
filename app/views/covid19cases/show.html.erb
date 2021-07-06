@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @covid19case.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @covid19case.age %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @covid19case.sex %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @covid19case.nationality %>
+</p>
+
+<p>
+  <strong>Quarantine Province:</strong>
+  <%= @covid19case.qua_province %>
+</p>
+
+<p>
+  <strong>Notification Date:</strong>
+  <%= @covid19case.notification_date %>
+</p>
+
+<p>
+  <strong>Announce Date:</strong>
+  <%= @covid19case.announce_date %>
+</p>
+
+<p>
+  <strong>Onset Province:</strong>
+  <%= @covid19case.onset_province %>
+</p>
+
+<p>
+  <strong>Onset District:</strong>
+  <%= @covid19case.onset_district %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @covid19case.status %>
+</p>
+
+<p>
+  <strong>ID / Passport:</strong>
+  <%= @covid19case.id_pass %>
+</p>
+
+<p>
+  <strong>Remark1:</strong>
+  <%= @covid19case.remark1 %>
+</p>
+
+<p>
+  <strong>Remark2:</strong>
+  <%= @covid19case.remark2 %>
+</p>
+
+<%= link_to 'Edit', edit_covid19case_path(@covid19case) %> |
+<%= link_to 'Back', covid19cases_path %>

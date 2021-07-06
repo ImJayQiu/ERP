@@ -1,0 +1,2 @@
+class Livingitem < ApplicationRecord
+end

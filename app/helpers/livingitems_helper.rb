@@ -1,0 +1,2 @@
+module LivingitemsHelper
+end

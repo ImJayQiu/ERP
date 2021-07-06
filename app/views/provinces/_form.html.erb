@@ -1,0 +1,43 @@
+<%= form_with(model: province, local: true) do |form| %>
+  <% if province.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(province.errors.count, "error") %> prohibited this province from being saved:</h2>
+
+      <ul>
+        <% province.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :population %>
+    <%= form.text_field :population %>
+  </div>
+
+  <div class="field">
+    <%= form.label :density %>
+    <%= form.text_field :density %> ( Unit: Square kilometre )
+  </div>
+
+
+  <div class="field">
+    <%= form.label :polygon %>
+    <%= form.text_area :polygon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remark %>
+    <%= form.text_field :remark %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,117 @@
+
+<% indextxt =  Indexpage.find_by(id: 1) %>
+
+<html>
+
+    <%= render "layouts/parts/head" %>
+
+    <body>
+
+	<!-- Header -->
+	<%= render "layouts/parts/header" %>
+
+	<!-- Menu -->
+	<%= render "layouts/parts/menu" %>
+
+	<!-- Banner -->
+	<% indextxt =  Indexpage.find_by(id: 1) %>
+	<section id="banner">
+	    <div class="content">
+		<h1><%= indextxt.t01 %></h1>
+		<p><%= indextxt.t02 %></p>
+		<ul class="actions">
+		    <li><a href="#one" class="button scrolly">Get Started</a></li>
+		</ul>
+	    </div>
+	</section>
+
+	<!-- One -->
+	<section id="one" class="wrapper">
+	    <div class="inner flex flex-3">
+		<div class="flex-item left">
+		    <div>
+			<h3><%= indextxt.t03 %></h3>
+			<p><%= indextxt.t04 %></p>
+		    </div>
+		    <div>
+			<h3><%= indextxt.t05 %></h3>
+			<p><%= indextxt.t06 %></p>
+		    </div>
+		</div>
+		<div class="flex-item image fit round">
+		    <img src="/images/pic01.jpg" alt="" />
+		</div>
+		<div class="flex-item right">
+		    <div>
+			<h3><%= indextxt.t07 %></h3>
+			<p><%= indextxt.t08 %></p>
+		    </div>
+		    <div>
+			<h3><%= indextxt.t09 %></h3>
+			<p><%= indextxt.t10 %></p>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+	<!-- Two -->
+	<section id="two" class="wrapper style1 special">
+	    <div class="inner">
+		<h2><%= indextxt.t11 %></h2>
+		<figure>
+		    <blockquote>
+			<%= indextxt.t12 %>
+		    </blockquote>
+		    <footer>
+			<cite class="author">
+			    <%= indextxt.t13 %>
+			</cite>
+			<cite class="company">
+			    <%= indextxt.t14 %>
+			</cite>
+		    </footer>
+		</figure>
+	    </div>
+	</section>
+
+	<!-- Three -->
+	<section id="three" class="wrapper">
+	    <div class="inner flex flex-3">
+		<div class="flex-item box">
+		    <div class="image fit">
+			<img src="/images/pic02.jpg" alt="" />
+		    </div>
+		    <div class="content">
+			<h3><%= indextxt.t15 %></h3>
+			<p><%= indextxt.t16 %></p>
+		    </div>
+		</div>
+		<div class="flex-item box">
+		    <div class="image fit">
+			<img src="/images/pic03.jpg" alt="" />
+		    </div>
+		    <div class="content">
+			<h3><%= indextxt.t17 %></h3>
+			<p><%= indextxt.t18 %></p>
+		    </div>
+		</div>
+		<div class="flex-item box">
+		    <div class="image fit">
+			<img src="/images/pic04.jpg" alt="" />
+		    </div>
+		    <div class="content">
+			<h3><%= indextxt.t19 %></h3>
+			<p><%= indextxt.t20 %></p>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+	<!-- Footer -->
+	<%= render "layouts/parts/footer", :indextxt => indextxt %>
+
+	<!-- Scripts -->
+	<%= render "layouts/parts/scripts" %>
+
+    </body>
+</html>

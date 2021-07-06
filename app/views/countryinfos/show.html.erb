@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @countryinfo.name %>
+</p>
+
+<p>
+  <strong>Iso:</strong>
+  <%= @countryinfo.ISO %>
+</p>
+
+<p>
+  <strong>Lon:</strong>
+  <%= @countryinfo.lon %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @countryinfo.lat %>
+</p>
+
+<p>
+  <strong>Zoom:</strong>
+  <%= @countryinfo.zoom %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @countryinfo.remark %>
+</p>
+
+<%= link_to 'Edit', edit_countryinfo_path(@countryinfo) %> |
+<%= link_to 'Back', countryinfos_path %>

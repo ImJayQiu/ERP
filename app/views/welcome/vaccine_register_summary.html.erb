@@ -1,0 +1,181 @@
+<!-- Main -->
+<script src="/assets/js/chartkick.js"></script>
+<script src="/assets/js/highcharts.js"></script>
+<section id="main" class="wrapper">
+  <div class="inner">
+    <header class="align-center">
+      <h1><%= @country_name %> COVID Vaccine Register Summary Report</h1>
+      <p>The overview of current vaccine register summary of <%= @country_name %></p>
+    </header>
+
+
+
+
+    <span class="image fit">
+      <div id="mapid" style="width: 100%; height: <%= @map_h %>px;"></div>
+    </span>
+    <div class="box alt">
+      <div class="row 50% uniform">
+        <div class="6u">
+          <%= pie_chart Covid19case.group(:sex).count, title: "Gender Distirbution" %>
+        </div>
+        <div class="6u">
+          <%= column_chart Covid19case.group(:age).count, title: "Age Distribution" %>
+        </div>
+        <!-- Break -->
+        <div class="12u">
+          <%= column_chart Covid19case.group(:qua_province).count, title: "Covid-19 Quarantine Distribution" %>
+        </div>
+
+        <!-- Break -->
+        <div class="6u">
+          <%= pie_chart Covid19case.group(:status).count, title: "Thailand Covid-19 status overview" %>
+        </div>
+        <div class="6u">
+          <%= pie_chart Covid19case.group(:onset_province).count, title: "Thailand Covid-19 onset province" %>
+        </div>
+
+        <!-- Break -->
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Scripts -->
+<%= render "layouts/parts/scripts" %>
+
+<script>
+
+  var map = L.map('mapid').setView([<%= @c_domain %>], <%= @zoom %>);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 20,
+  minZoom: 1 
+}).addTo(map);
+
+
+var provinces = [
+
+  <% @provinces.each do |p| %>
+    <% reg_value = Vaccinereg.where(province: p.name).count rescue nil %>
+  <% percentage = (reg_value.to_f / p.population.to_f * 100).round(2) rescue ZeroDivisionError %>
+  {
+    "type": "Feature",
+    "properties": {"province": "<%= p.name rescue nil %>", "value": "<%= reg_value rescue nil %>", "population": "<%= p.population rescue nil %>", "density": "<%= p.density rescue nil %>", "percentage": "<%= percentage %>" },
+    "geometry": {
+      "type": "<%= p.remark %>",
+      "coordinates": <%= p.polygon.to_s %>
+  }
+  }, 
+<% end %>
+];
+L.geoJSON(provinces).addTo(map);
+///// provinces polygon finish ///
+
+///// control that shows state info on hover
+var info = L.control();
+
+info.onAdd = function (map) {
+  this._div = L.DomUtil.create('div', 'info');
+  this.update();
+  return this._div;
+};
+
+info.update = function (props) {
+  this._div.innerHTML = '<h4>Thailand Medical Capacity Map</h4>' +
+    (props ? '<b>' + props.province + '</b><br />' + props.value + " Register Persons" + '</b><br />' + props.population + " Population" + '</b><br />' + props.density + " per Square kilometre" + '</b><br />' + props.percentage + " %" : 'Hover over a state');
+};
+
+info.addTo(map);
+////// finish control that shows state info on hover
+
+function getColor(d) {
+  return  d > 100 ? '#00FF00' :
+    d > 90  ? '#22FF00' :
+    d > 80  ? '#44FF00' :
+    d > 70  ? '#66FF00' :
+    d > 60  ? '#AAFF00' :
+    d > 50  ? '#CCFF00' :
+    d > 40  ? '#FFEE00' :
+    d > 30   ? '#FFCC00' :
+    d > 20   ? '#FF8800' :
+    d > 10   ? '#FF6600' :
+    d > 0   ? '#FF2200':
+    '#FF0000';
+}
+
+function style(feature) {
+  return {
+    fillColor: getColor(feature.properties.percentage),
+    weight: 1,
+    opacity: 1,
+    color: 'white',
+    dashArray: '3',
+    fillOpacity: 0.7
+  };
+}
+
+function highlightFeature(e) {
+  var layer = e.target;
+  layer.setStyle({
+    weight: 5,
+    color: '#666',
+    dashArray: '',
+    fillOpacity: 0.7
+  });
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+  info.update(layer.feature.properties);
+}
+
+var geojson;
+
+function resetHighlight(e) {
+  geojson.resetStyle(e.target);
+  info.update();
+}
+
+function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+    click: zoomToFeature
+  });
+}
+
+geojson = L.geoJson(provinces, {
+  style: style,
+  onEachFeature: onEachFeature
+}).addTo(map);
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+  var div = L.DomUtil.create('div', 'info legend'),
+    grades = [1, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+    labels = ["Unit: %"],
+    from, to;
+  labels.push('<i style="background:' + getColor("FFFFFF") + '"></i> ' + '0');
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+    labels.push(
+      '<i style="background:' + getColor(from + 1) + '"></i> ' +
+      from + (to ? '&ndash;' + to : '+'));
+  }
+  div.innerHTML = labels.join('<br>');
+  return div;
+};
+
+legend.addTo(map);
+
+
+</script>

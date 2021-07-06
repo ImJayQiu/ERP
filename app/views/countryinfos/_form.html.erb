@@ -1,0 +1,43 @@
+<%= form_with(model: countryinfo, local: true) do |form| %>
+  <% if countryinfo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(countryinfo.errors.count, "error") %> prohibited this countryinfo from being saved:</h2>
+
+      <ul>
+        <% countryinfo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+   Country Name: <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="field">
+    Country ISO code: <%= form.text_field :ISO, required: true %>
+  </div>
+
+  <div class="field">
+    Center Longitude: <%= form.text_field :lon, required: true %>
+  </div>
+
+  <div class="field">
+    Center Latitude: <%= form.text_field :lat, required: true %>
+  </div>
+
+  <div class="field">
+    Zoom Level: <%= form.text_field :zoom, required: true %>
+  </div>
+
+  <div class="field">
+    Map Height: <%= form.text_field :remark, required: true %> px
+  </div>
+
+<p>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

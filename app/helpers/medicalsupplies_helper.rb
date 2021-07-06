@@ -1,0 +1,2 @@
+module MedicalsuppliesHelper
+end

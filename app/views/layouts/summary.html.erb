@@ -1,0 +1,24 @@
+
+<% indextxt =  Indexpage.find_by(id: 1) %>
+
+<html>
+    <%= render "layouts/parts/head" %>
+
+    <body class="subpage">
+
+	<!-- Header -->
+	<%= render "layouts/parts/header" %>
+
+	<!-- Menu -->
+	<%= render "layouts/parts/menu" %>
+
+	<!-- Main -->
+
+	<%= yield %>
+
+
+	<!-- Footer -->
+	<%= render "layouts/parts/footer", :indextxt => indextxt %>
+
+    </body>
+</html>

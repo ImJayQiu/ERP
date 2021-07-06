@@ -1,0 +1,79 @@
+<%= form_with(model: livingsupply, local: true) do |form| %>
+    <% if livingsupply.errors.any? %>
+	<div id="error_explanation">
+	    <h2><%= pluralize(livingsupply.errors.count, "error") %> prohibited this livingsupply from being saved:</h2>
+
+	    <ul>
+		<% livingsupply.errors.full_messages.each do |message| %>
+		    <li><%= message %></li>
+		<% end %>
+	    </ul>
+	</div>
+    <% end %>
+
+    <div class="table-wrapper">
+	<table>
+
+	    <tr>
+		<td>
+		    <%= form.label :date %>
+		</td>
+		<td>
+		    <%= form.datetime_select :date %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :item %>
+		</td>
+		<td>
+		    <%= form.select :item, options_from_collection_for_select(Livingitem.all.order(:name), :name, :name), include_blank: true %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :quantity %>
+		</td>
+		<td>
+		    <%= form.text_field :quantity %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :unit %>
+		</td>
+		<td>
+		    <%= form.select :unit, options_from_collection_for_select(Unit.all.order(:name), :name, :name), include_blank: true %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :province %>
+		</td>
+		<td>
+		    <%= form.select :province, options_from_collection_for_select(Province.all.order(:name), :name, :name), include_blank: true %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :remark %>
+		</td>
+		<td>
+		    <%= form.text_area :remark %>
+		</td>
+	    </tr>
+
+	</table>
+
+    </div>
+
+<div class="actions">
+    <%= form.submit "Submit" %>
+</div>
+
+<% end %>

@@ -1,0 +1,2 @@
+module LivingsuppliesHelper
+end

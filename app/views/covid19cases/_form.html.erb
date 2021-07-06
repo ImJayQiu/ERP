@@ -1,0 +1,111 @@
+<%= form_with(model: covid19case, local: true) do |form| %>
+    <% if covid19case.errors.any? %>
+	<div id="error_explanation">
+	    <h2><%= pluralize(covid19case.errors.count, "error") %> prohibited this covid19case from being saved:</h2>
+
+	    <ul>
+		<% covid19case.errors.full_messages.each do |message| %>
+		    <li><%= message %></li>
+		<% end %>
+	    </ul>
+	</div>
+    <% end %>
+
+    <div class="table-wrapper">
+	<table>
+	    <tr>
+		<td><%= form.label "Name" %></td>
+		<td><%= form.text_field :name %></td>
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :age %></td>
+
+		<td><%= form.text_field :age %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :sex %></td>
+
+		<td><%= form.text_field :sex %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :nationality %></td>
+
+		<td><%= form.text_field :nationality %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label "Quarantine Province" %></td>
+
+		<td><%= form.text_field :qua_province %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :notification_date %></td>
+
+		<td><%= form.date_select :notification_date %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :announce_date %></td>
+
+		<td><%= form.date_select :announce_date %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :onset_province %></td>
+
+		<td><%= form.text_field :onset_province %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :onset_district %></td>
+
+		<td><%= form.text_field :onset_district %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :status %></td>
+
+		<td><%= form.text_field :status %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label "ID / Passport" %></td>
+
+		<td><%= form.text_field :id_pass %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :remark1 %></td>
+
+		<td><%= form.text_field :remark1 %></td>
+
+	    </tr>
+
+	    <tr>
+		<td><%= form.label :remark2 %></td>
+
+		<td><%= form.text_field :remark2 %></td>
+
+	    </tr>
+	</table>
+    </div>
+
+    <div class="actions">
+	<%= form.submit "Add new case" %>
+    </div>
+
+<% end %>

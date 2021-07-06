@@ -1,0 +1,39 @@
+<!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+	<li><a href="/">Home</a></li>
+	<% if user_signed_in? %> 
+
+	    <li>>> Report <<</li>
+	    <li><%= link_to "COVID Summary Report", welcome_summary_path %></li>
+	    <li><%= link_to "Medical Summary Report", welcome_medical_capacity_summary_path %></li>
+	    <li><%= link_to "Living Summary Report", welcome_living_supply_summary_path %></li>
+	    <li><%= link_to "Vaccine Register Report", welcome_vaccine_register_summary_path %></li>
+
+	    <p>
+
+	    <li>>> Functions <<</li>
+	    <li><%= link_to "Covid-19 Cases Management", covid19cases_path %></li>
+	    <li><%= link_to "Living Supplies Management", livingsupplies_path %></li>
+	    <li><%= link_to "Medical Capacity Management", medicalsupplies_path %></li>
+	    <li><%= link_to "Vaccine Registration Form", vaccineregs_path %></li>
+	    <p>
+	    <li>>> Settings <<</li>
+	    <li><%= link_to "Provinces Setting", provinces_path %></li>
+	    <li><%= link_to "Units Setting", units_path %></li>
+	    <li><%= link_to "Living Items Setting", livingitems_path %></li>
+	    <li><%= link_to "Medical Items Setting", medicalitems_path %></li>
+	    <li><%= link_to "Edit Homepage", indexpages_path %></li>
+	    <li><%= link_to "Country Setting", countryinfos_path %></li>
+	    <p>
+	    <li>>> Account <<</li>
+	    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+	<% else %>
+	    <li><a href="/users/sign_up">Sign Up</a></li>
+	    <li><%= link_to "Login", new_user_session_path %></li>
+	<% end %>
+    </ul>
+    <ul class="actions vertical">
+	<li><a href="#" class="button fit">Login</a></li>
+    </ul>
+</nav>

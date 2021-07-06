@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @livingitem.name %>
+</p>
+
+<p>
+  <strong>Des:</strong>
+  <%= @livingitem.des %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @livingitem.remark %>
+</p>
+
+<%= link_to 'Edit', edit_livingitem_path(@livingitem) %> |
+<%= link_to 'Back', livingitems_path %>

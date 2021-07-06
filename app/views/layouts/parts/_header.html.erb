@@ -1,0 +1,16 @@
+<!-- Header -->
+<header id="header">
+    <nav class="left">
+	<a href="#menu"><span>Menu</span></a>
+    </nav>
+
+    <a href="/" ><img style="vertical-align: bottom" src="/images/small_logo.jpg" alt="logo" /></a>
+    <nav class="right">
+	<% if user_signed_in? %>
+	    <%= button_to('Logout', destroy_user_session_path, method: :delete) %>
+	<% else %>
+	    <%= button_to('Login', new_user_session_path) %>
+	<% end %>
+    </nav>
+</header>
+

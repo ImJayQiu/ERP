@@ -1,0 +1,161 @@
+<!-- Main -->
+<script src="/assets/js/chartkick.js"></script>
+<script src="/assets/js/highcharts.js"></script>
+<section id="main" class="wrapper">
+    <div class="inner">
+	<header class="align-center">
+          <h1><%= @country_name %> Vaccine Register Summary Report</h1>
+          <p>The overview of current vaccine register summary of <%= @country_name %></p>
+	</header>
+
+
+	<span class="image fit">
+            <div id="mapid" style="width: 100%; height: <%= @map_h %>px;"></div>
+	</span>
+	<div class="box alt">
+	    <div class="row 50% uniform">
+	<!-- Break -->
+	
+		<div class="12u">
+		    <%= column_chart Livingsupply.group(:item, :province).sum(:quantity), title: "Living Supply Distribution" %>
+		</div>
+
+
+	    </div>
+	</div>
+
+    </div>
+</section>
+
+<!-- Scripts -->
+<%= render "layouts/parts/scripts" %>
+
+<script>
+
+   // var map = L.map('mapid').setView([13, 101.5], 5);
+var map = L.map('mapid').setView([<%= @c_domain %>], <%= @zoom %>);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 20,
+    minZoom: 1 
+}).addTo(map);
+
+
+var provinces = [
+
+    <% @provinces.each do |p| %>
+	{
+	    "type": "Feature",
+	    "properties": {"province": "<%= p.name %>", "value": "<%= Livingsupply.where(province: p.name, item: 'Egg').last.quantity rescue nil %>" },
+	    "geometry": {
+		"type": "<%= p.remark %>",
+		"coordinates": <%= p.polygon.to_s %>
+	}
+	}, 
+<% end %>
+];
+L.geoJSON(provinces).addTo(map);
+///// provinces polygon finish ///
+
+///// control that shows state info on hover
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
+
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Thailand Medical Capacity Map</h4>' +
+	(props ? '<b>' + props.province + '</b><br />' + props.value + " Egg (Boxes)"  : 'Hover over a state');
+};
+
+info.addTo(map);
+////// finish control that shows state info on hover
+
+function getColor(d) {
+    return  d > 2000 ? '#800026' :
+	d > 1500  ? '#BD0026' :
+	d > 1000  ? '#E31A1C' :
+	d > 800  ? '#FC4E2A' :
+	d > 600   ? '#FD8D3C' :
+	d > 400   ? '#FEB24C' :
+	d > 200   ? '#FED976' :
+	d > 0   ? '#FFEDA0':
+	'#FFFFFF';
+}
+
+function style(feature) {
+    return {
+	fillColor: getColor(feature.properties.value),
+	weight: 1,
+	opacity: 1,
+	color: 'white',
+	dashArray: '3',
+	fillOpacity: 0.7
+    };
+}
+
+function highlightFeature(e) {
+    var layer = e.target;
+    layer.setStyle({
+	weight: 5,
+	color: '#666',
+	dashArray: '',
+	fillOpacity: 0.7
+    });
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+	layer.bringToFront();
+    }
+    info.update(layer.feature.properties);
+}
+
+var geojson;
+
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    info.update();
+}
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+    layer.on({
+	mouseover: highlightFeature,
+	mouseout: resetHighlight,
+	click: zoomToFeature
+    });
+}
+
+geojson = L.geoJson(provinces, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+	grades = [1, 200, 400, 600, 800, 1000, 1500, 2000],
+	labels = [],
+	from, to;
+    labels.push('<i style="background:' + getColor("FFFFFF") + '"></i> ' + '0');
+    for (var i = 0; i < grades.length; i++) {
+	from = grades[i];
+	to = grades[i + 1];
+	labels.push(
+	    '<i style="background:' + getColor(from + 1) + '"></i> ' +
+	    from + (to ? '&ndash;' + to : '+'));
+    }
+    div.innerHTML = labels.join('<br>');
+    return div;
+};
+
+legend.addTo(map);
+
+
+</script>

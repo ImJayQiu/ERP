@@ -1,0 +1,122 @@
+<%= form_with(model: vaccinereg, local: true) do |form| %>
+    <% if vaccinereg.errors.any? %>
+	<div id="error_explanation">
+	    <h2><%= pluralize(vaccinereg.errors.count, "error") %> prohibited this vaccinereg from being saved:</h2>
+
+	    <ul>
+		<% vaccinereg.errors.full_messages.each do |message| %>
+		    <li><%= message %></li>
+		<% end %>
+	    </ul>
+	</div>
+    <% end %>
+
+    <div class="field">
+	First Name:
+	<%= form.text_field :firstname %>
+    </div>
+
+    <div class="field">
+	Last Name:
+	<%= form.text_field :lastname %>
+    </div>
+
+    <div class="field">
+	ID / Passport:
+	<%= form.text_field :idpass %>
+    </div>
+
+    <div class="field">
+	Birthday:
+	<%= form.date_select :birthday %>
+    </div>
+
+    <div class="field">
+	Gender:
+	<%= form.text_field :gender %>
+    </div>
+
+    <div class="field">
+	Email:
+	<%= form.text_field :email %>
+    </div>
+
+    <div class="field">
+	Phone:
+	<%= form.text_field :phone %>
+    </div>
+
+    <div class="field">
+	Country:
+	<%= form.text_field :country %>
+    </div>
+
+    <div class="field">
+	Province:
+	<%= form.select :province, options_from_collection_for_select(Province.all.order(:name), :name, :name), include_blank: true %>
+    </div>
+
+    <div class="field">
+	City:
+	<%= form.text_field :city %>
+    </div>
+
+    <div class="field">
+	Address:
+	<%= form.text_area :address %>
+    </div>
+
+    <div class="field">
+	Zip/Postcode:
+	<%= form.text_field :zipcode %>
+    </div>
+
+    <div class="field">
+	Insurance Company: 
+	<%= form.text_field :insurancecompany %>
+    </div>
+
+    <div class="field">
+	Insurance ID: 
+	<%= form.text_field :insuranceid %>
+    </div>
+
+    <div class="field">
+	Current Health Condition:
+	<%= form.text_area :healthcondition %>
+    </div>
+
+    <div class="field">
+	Current Medication:
+	<%= form.text_field :currentmedication %>
+    </div>
+
+    <div class="field">
+	Allergies:
+	<%= form.text_area :allergies %>
+    </div>
+
+    <div class="field">
+	Have you been diagnosed with COVID-19 ?
+	<%= form.text_field :covidhistory %>
+    </div>
+
+    <div class="field">
+	If yes, please provide further details (Date of diagnition, treatment details, etc.)
+	<%= form.text_area :coviddetail %>
+    </div>
+
+    <div class="field">
+	Remark:
+	<%= form.text_area :remark %>
+    </div>
+
+    <div class="field">
+	I hereby declare that all the given information are accurate.
+	<%= form.text_field :declare %>
+    </div>
+
+    <div class="actions">
+	<%= form.submit %>
+    </div>
+<% end %>

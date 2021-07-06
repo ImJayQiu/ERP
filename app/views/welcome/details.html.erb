@@ -1,0 +1,59 @@
+<!-- Main -->
+<script src="/assets/js/chartkick.js"></script>
+<script src="/assets/js/highcharts.js"></script>
+<section id="main" class="wrapper">
+    <div class="inner">
+	<header class="align-center">
+	    <h1><%=@title%></h1>
+	</header>
+
+
+	<table>
+	    <tr>
+		<td>Item</td>
+		<td>Quantity</td>
+		<td>Unit</td>
+	    </tr>
+	    <% @details_data.group(:item).maximum(:id).each do |d| %>
+		<tr>
+		    <td><%= d[0] %></td>
+		    <td><%= @details_data.find(d[1]).quantity %></td>
+		    <td><%= @details_data.find(d[1]).unit %></td>
+		</tr>
+
+	    <%end%>
+	</table>
+
+
+	<div class="box alt">
+	    <div class="row 50% uniform">
+		<div class="6u">
+		    <%#= pie_chart @details_data.group(:item).sum(:quantity), title: "Summary of Medical Capacity" %>
+		</div>
+		<div class="6u">
+		    <%#= column_chart @details.group(:age).count, title: "Age Distribution" %>
+		</div>
+		<!-- Break -->
+		<div class="12u">
+		    <%#= column_chart @details.group(:qua_province).count, title: "Covid-19 Quarantine Distribution" %>
+		</div>
+
+		<!-- Break -->
+		<div class="6u">
+		    <%#= pie_chart Covid19case.group(:status).count, title: "Thailand Covid-19 status overview" %>
+		</div>
+		<div class="6u">
+		    <%#= pie_chart Covid19case.group(:onset_province).count, title: "Thailand Covid-19 onset province" %>
+		</div>
+
+		<!-- Break -->
+
+	    </div>
+	</div>
+
+    </div>
+</section>
+
+<!-- Scripts -->
+<%= render "layouts/parts/scripts" %>
+

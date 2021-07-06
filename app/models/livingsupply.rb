@@ -1,0 +1,2 @@
+class Livingsupply < ApplicationRecord
+end

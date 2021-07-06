@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firstname: MyString
+  lastname: MyString
+  idpass: MyString
+  birthday: 2021-02-03
+  gender: MyString
+  email: MyString
+  phone: MyString
+  country: MyString
+  province: MyString
+  city: MyString
+  address: MyText
+  zipcode: MyString
+  insurancecompany: MyString
+  insuranceid: MyString
+  healthcondition: MyText
+  currentmedication: MyString
+  allergies: MyText
+  covidhistory: MyString
+  coviddetail: MyText
+  remark: MyText
+  declare: MyString
+
+two:
+  firstname: MyString
+  lastname: MyString
+  idpass: MyString
+  birthday: 2021-02-03
+  gender: MyString
+  email: MyString
+  phone: MyString
+  country: MyString
+  province: MyString
+  city: MyString
+  address: MyText
+  zipcode: MyString
+  insurancecompany: MyString
+  insuranceid: MyString
+  healthcondition: MyText
+  currentmedication: MyString
+  allergies: MyText
+  covidhistory: MyString
+  coviddetail: MyText
+  remark: MyText
+  declare: MyString

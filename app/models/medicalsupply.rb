@@ -1,0 +1,2 @@
+class Medicalsupply < ApplicationRecord
+end

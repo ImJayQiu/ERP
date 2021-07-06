@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @medicalsupply.date %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @medicalsupply.item %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @medicalsupply.quantity %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @medicalsupply.unit %>
+</p>
+
+<p>
+  <strong>Province:</strong>
+  <%= @medicalsupply.province %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @medicalsupply.remark %>
+</p>
+
+<%= link_to 'Edit', edit_medicalsupply_path(@medicalsupply) %> |
+<%= link_to 'Back', medicalsupplies_path %>

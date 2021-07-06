@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 
+  sex: MyString
+  nationality: MyString
+  qua_province: MyString
+  notification_date: 2020-12-12
+  announce_date: 2020-12-12
+  onset_province: MyString
+  onset_district: MyString
+  status: MyString
+  id_pass: MyString
+  remark1: MyString
+  remark2: MyString
+
+two:
+  name: MyString
+  age: 
+  sex: MyString
+  nationality: MyString
+  qua_province: MyString
+  notification_date: 2020-12-12
+  announce_date: 2020-12-12
+  onset_province: MyString
+  onset_district: MyString
+  status: MyString
+  id_pass: MyString
+  remark1: MyString
+  remark2: MyString

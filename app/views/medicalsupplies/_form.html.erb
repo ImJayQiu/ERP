@@ -1,0 +1,80 @@
+<%= form_with(model: medicalsupply, local: true) do |form| %>
+    <% if medicalsupply.errors.any? %>
+	<div id="error_explanation">
+	    <h2><%= pluralize(medicalsupply.errors.count, "error") %> prohibited this medicalsupply from being saved:</h2>
+
+	    <ul>
+		<% medicalsupply.errors.full_messages.each do |message| %>
+		    <li><%= message %></li>
+		<% end %>
+	    </ul>
+	</div>
+    <% end %>
+
+    <div class="table-wrapper">
+
+	<table>
+
+	    <tr>
+		<td>
+		    <%= form.label :date %>
+		</td>
+		<td>
+		    <%= form.date_select :date %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :item %>
+		</td>
+		<td>
+		    <%= form.select :item, options_from_collection_for_select(Medicalitem.all.order(:name), :name, :name), include_blank: true %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :quantity %>
+		</td>
+		<td>
+		    <%= form.text_field :quantity %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :unit %>
+		</td>
+		<td>
+		    <%= form.select :unit, options_from_collection_for_select(Unit.all.order(:name), :name, :name), include_blank: true %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :province %>
+		</td>
+		<td>
+		    <%= form.select :province, options_from_collection_for_select(Province.all.order(:name), :name, :name), include_blank: true %>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <%= form.label :remark %>
+		</td>
+		<td>
+		    <%= form.text_area :remark %>
+		</td>
+	    </tr>
+
+	</table>
+
+    </div>
+
+    <div class="actions">
+	<%= form.submit "Submit" %>
+    </div>
+
+<% end %>
